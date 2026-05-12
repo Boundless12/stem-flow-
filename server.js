@@ -40,7 +40,7 @@ try {
 const ALLOW_ORIGIN = process.env.ALLOW_ORIGIN || '*';
 app.use(cors({ origin: ALLOW_ORIGIN }));
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(__dirname));
 
 // --- Multer config ---
 const storage = multer.diskStorage({
@@ -372,7 +372,7 @@ setInterval(() => {
 
 // --- Serve index.html for all other routes (SPA) ---
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.listen(PORT, '0.0.0.0', () => {

@@ -71,7 +71,12 @@
       "Bash(npx vercel *)",
       "Bash(vercel whoami *)",
       "Bash(git commit *)",
-      "Bash(vercel list *)"
+      "Bash(vercel list *)",
+      "Bash(cp public/index.html index.html)",
+      "Bash(cp public/style.css style.css)",
+      "Bash(cp public/app.js app.js)",
+      "Bash(rm -rf public/)",
+      "Bash(mv script.js script.js.bak)"
     ]
   }
 }

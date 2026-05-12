@@ -1,509 +1,293 @@
-/* 全局样式 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ===== Design System ===== */
+:root {
+  --bg-primary: #080E1A;
+  --bg-secondary: #0D1628;
+  --bg-card: rgba(255, 255, 255, 0.04);
+  --bg-card-hover: rgba(255, 255, 255, 0.07);
+  --bg-elevated: #131F35;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(255, 255, 255, 0.15);
+
+  --text-primary: #E8EDF5;
+  --text-secondary: #7B8CAA;
+  --text-muted: #556377;
+
+  --accent-blue: #4A90D9;
+  --accent-blue-dim: #2B6CB0;
+  --accent-orange: #FF6B35;
+  --accent-orange-dim: #CC5529;
+  --accent-green: #48BB78;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  --transition: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
+/* ===== Reset ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #f0f0f0;
-    color: #333;
-    overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans SC', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-.game-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+/* ===== Navbar ===== */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  background: rgba(8, 14, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 960px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+}
+.nav-brand { display: flex; align-items: center; gap: 10px; }
+.logo-icon { flex-shrink: 0; }
+.brand-text {
+  font-size: 18px; font-weight: 700;
+  background: linear-gradient(135deg, #E8EDF5 0%, #4A90D9 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.nav-links { display: flex; gap: 24px; }
+.nav-links a {
+  color: var(--text-secondary); text-decoration: none;
+  font-size: 14px; transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--text-primary); }
+
+/* ===== Main ===== */
+.main { max-width: 720px; margin: 0 auto; padding: 80px 24px 60px; }
+
+/* ===== Upload Section ===== */
+.upload-section { text-align: center; padding-top: 24px; }
+.section-title {
+  font-size: 28px; font-weight: 700; letter-spacing: -0.3px;
+  background: linear-gradient(135deg, #E8EDF5, #4A90D9);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.section-desc { color: var(--text-secondary); margin-top: 8px; font-size: 15px; }
+
+/* Upload Zone */
+.upload-zone {
+  margin-top: 32px; padding: 48px 24px;
+  border: 2px dashed var(--border);
+  border-radius: var(--radius-xl);
+  background: var(--bg-card);
+  cursor: pointer;
+  transition: all var(--transition);
+  position: relative; overflow: hidden;
+}
+.upload-zone::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(600px circle at var(--x, 50%) var(--y, 50%), rgba(74,144,217,0.06), transparent);
+  opacity: 0; transition: opacity 0.4s;
+}
+.upload-zone:hover { border-color: var(--accent-blue); background: var(--bg-card-hover); }
+.upload-zone:hover::before { opacity: 1; }
+.upload-zone.dragover {
+  border-color: var(--accent-orange); background: rgba(255,107,53,0.06);
+  transform: scale(1.01);
+}
+.upload-zone .upload-icon { color: var(--accent-blue); margin-bottom: 16px; }
+.upload-text { font-size: 17px; font-weight: 600; }
+.upload-sub { color: var(--text-secondary); font-size: 13px; margin-top: 6px; }
+
+.upload-btn {
+  margin-top: 20px; display: inline-flex; align-items: center; gap: 6px;
+  padding: 10px 28px; border: none; border-radius: var(--radius-md);
+  background: var(--accent-blue); color: white; font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all var(--transition);
+}
+.upload-btn:hover { background: var(--accent-blue-dim); transform: translateY(-1px); }
+
+/* URL Input */
+.url-input-group { margin-top: 24px; }
+.url-divider {
+  display: flex; align-items: center; gap: 16px;
+  color: var(--text-muted); font-size: 13px; margin-bottom: 14px;
+}
+.url-divider::before, .url-divider::after {
+  content: ''; flex: 1; height: 1px; background: var(--border);
+}
+.url-row { display: flex; gap: 10px; }
+.url-input {
+  flex: 1; padding: 10px 16px; border: 1px solid var(--border); border-radius: var(--radius-md);
+  background: var(--bg-card); color: var(--text-primary); font-size: 14px;
+  outline: none; transition: border-color var(--transition);
+}
+.url-input::placeholder { color: var(--text-muted); }
+.url-input:focus { border-color: var(--accent-blue); }
+
+.url-btn {
+  padding: 10px 22px; border: none; border-radius: var(--radius-md);
+  background: var(--accent-orange); color: white; font-size: 14px; font-weight: 600;
+  cursor: pointer; white-space: nowrap; transition: all var(--transition);
+}
+.url-btn:hover { background: var(--accent-orange-dim); }
+.url-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* Format Badges */
+.format-hint {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-top: 20px; color: var(--text-muted); font-size: 13px;
+}
+.format-badge {
+  padding: 2px 10px; border-radius: 4px;
+  background: rgba(255,255,255,0.06); color: var(--text-secondary);
+  font-size: 12px; font-weight: 500;
 }
 
-/* 游戏标题 */
-.game-title {
-    font-size: 4rem;
-    font-weight: bold;
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
-    background-size: 200% 200%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: gradientShift 3s ease infinite;
-    margin-bottom: 10px;
-    text-align: center;
+/* ===== Processing Section ===== */
+.processing-section {
+  margin-top: 32px; padding: 32px 24px;
+  background: var(--bg-card); border-radius: var(--radius-xl);
+  border: 1px solid var(--border); text-align: center;
+}
+.process-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px;
+}
+.file-info { display: flex; align-items: center; gap: 8px; font-size: 14px; }
+.file-info .file-icon { color: var(--accent-blue); flex-shrink: 0; }
+.process-status { font-size: 13px; color: var(--accent-orange); font-weight: 600; }
+
+/* Progress Ring */
+.progress-ring-container {
+  position: relative; display: inline-flex; align-items: center; justify-content: center;
+  margin-bottom: 24px;
+}
+.progress-text {
+  position: absolute; display: flex; flex-direction: column; align-items: center;
+}
+.progress-pct { font-size: 28px; font-weight: 700; color: var(--text-primary); }
+.progress-label { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.progress-fill { transition: stroke-dashoffset 0.6s ease; }
+
+/* Steps */
+.process-steps {
+  display: flex; justify-content: space-between; max-width: 400px; margin: 0 auto;
+}
+.step { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
+.step-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: var(--text-muted); transition: all var(--transition);
+}
+.step.active .step-dot { background: var(--accent-blue); box-shadow: 0 0 12px rgba(74,144,217,0.4); }
+.step.active { color: var(--accent-blue); }
+.step.done .step-dot { background: var(--accent-green); }
+.step.done { color: var(--accent-green); }
+
+/* ===== Stems Section ===== */
+.stems-section { margin-top: 32px; }
+.stems-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px;
+}
+.stems-header h2 { font-size: 18px; font-weight: 700; }
+.new-btn {
+  padding: 8px 20px; border: 1px solid var(--border); border-radius: var(--radius-md);
+  background: transparent; color: var(--text-secondary); font-size: 13px; font-weight: 600;
+  cursor: pointer; transition: all var(--transition);
+}
+.new-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+/* Stem Card */
+.stems-grid { display: grid; gap: 12px; }
+
+.stem-card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 16px 20px;
+  transition: all var(--transition);
+}
+.stem-card:hover { background: var(--bg-card-hover); border-color: var(--border-active); }
+
+.stem-card-header {
+  display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;
+}
+.stem-info { display: flex; align-items: center; gap: 10px; }
+.stem-icon {
+  width: 32px; height: 32px; border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+}
+.stem-icon.vocals { background: rgba(74,144,217,0.15); color: var(--accent-blue); }
+.stem-icon.drums { background: rgba(255,107,53,0.15); color: var(--accent-orange); }
+.stem-icon.bass { background: rgba(72,187,120,0.15); color: var(--accent-green); }
+.stem-icon.other { background: rgba(255,255,255,0.08); color: var(--text-secondary); }
+.stem-name { font-size: 15px; font-weight: 600; }
+.stem-size { font-size: 12px; color: var(--text-secondary); }
+
+.stem-controls { display: flex; align-items: center; gap: 8px; }
+.control-btn {
+  width: 32px; height: 32px; border: none; border-radius: 50%;
+  background: rgba(255,255,255,0.06); color: var(--text-secondary);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all var(--transition);
+}
+.control-btn:hover { background: rgba(255,255,255,0.12); color: var(--text-primary); }
+.control-btn.playing { background: var(--accent-blue); color: white; }
+.control-btn.solo-active { background: var(--accent-orange); color: white; }
+
+/* Waveform Canvas */
+.stem-waveform {
+  width: 100%; height: 48px; border-radius: var(--radius-sm);
+  cursor: pointer; margin-top: 4px;
 }
 
-.game-subtitle {
-    font-size: 1.5rem;
-    color: #666;
-    margin-bottom: 30px;
-    text-align: center;
+/* Download btn */
+.download-btn {
+  padding: 6px 14px; border-radius: var(--radius-sm);
+  background: transparent; border: 1px solid var(--border);
+  color: var(--text-secondary); font-size: 12px; cursor: pointer;
+  transition: all var(--transition); text-decoration: none; display: inline-flex;
+  align-items: center; gap: 4px;
+}
+.download-btn:hover { border-color: var(--accent-blue); color: var(--accent-blue); }
+
+/* ===== Footer ===== */
+.footer {
+  text-align: center; padding: 32px 24px; color: var(--text-muted); font-size: 13px;
+  border-top: 1px solid var(--border); margin-top: 16px;
 }
 
-@keyframes gradientShift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+/* ===== Animations ===== */
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
 }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
-/* 游戏说明 */
-.game-info {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    text-align: center;
-    margin-bottom: 30px;
-}
+.upload-zone.dragover .upload-icon { animation: pulse 1s ease infinite; }
+.stem-card { animation: fadeSlideUp 0.4s ease both; }
+.stem-card:nth-child(1) { animation-delay: 0.05s; }
+.stem-card:nth-child(2) { animation-delay: 0.1s; }
+.stem-card:nth-child(3) { animation-delay: 0.15s; }
+.stem-card:nth-child(4) { animation-delay: 0.2s; }
 
-.game-info h2 {
-    margin-bottom: 15px;
-    color: #333;
-}
-
-.game-info p {
-    margin-bottom: 10px;
-    text-align: left;
-}
-
-.start-btn {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #ff6b6b;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.start-btn:hover {
-    background-color: #ee5a52;
-    transform: translateY(-2px);
-}
-
-/* 人物选择界面 */
-.character-select {
-    text-align: center;
-    width: 100%;
-}
-
-.character-select h2 {
-    margin-bottom: 30px;
-    color: #333;
-}
-
-.characters {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
-}
-
-.character-card {
-    width: 200px;
-    height: 250px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    overflow: hidden;
-    position: relative;
-}
-
-.character-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-}
-
-.character-image {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: #f8f9fa;
-    position: relative;
-}
-
-.character-image[data-character="boss-female"] {
-    background-color: #ffc1cc;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwYzAgMC0yMCAwLTIwLTIwczAgLTIwIDIwLTIwIDIwIDAgMjAgMjAgMjAgMjAgMjAgMjB6bTAtMTBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBjMCAwIDIwIDAgMjAtMjBzMC0yMC0yMC0yMC0yMCAwLTIwIDIwLTIwIDIwLTIwIDIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjYwYzAtNS01LTEwLTEwLTEwcy0xMCA1LTEwIDEwIDUgNSAxMCA1IDEwLTUgMTAtNXptLTYwIDBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMjgwYzAgMC00MCAwLTQwLTQwczAtNDAgNDAgMCA0MCA0MCAwIDQwIDQwIDQwczAwIDQwLTQwIDQweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMCAyODBjMCAwIDQwIDAgNDAgNDAgMCA0MCA0MCA0MCA0MCAwIDQwIDAgMCA0MCA0MCA0MHMtNDAgMC00MC00MC0wLTQwLTQwLTQwLTQwLTQwczAwLTQwIDQwIDB6Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.character-image[data-character="boss-male"] {
-    background-color: #c1d3fe;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwYzAgMC0yMCAwLTIwLTIwczAgLTIwIDIwLTIwIDIwIDAgMjAgMjAgMjAgMjAgMjAgMjB6bTAtMTBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBjMCAwIDIwIDAgMjAtMjBzMC0yMC0yMC0yMC0yMCAwLTIwIDIwLTIwIDIwLTIwIDIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjYwYzAtNS01LTEwLTEwLTEwcy0xMCA1LTEwIDEwIDUgNSAxMCA1IDEwLTUgMTAtNXptLTYwIDBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMjgwYzAgMC00MCAwLTQwLTQwczAtNDAgNDAgMCA0MCA0MCAwIDQwIDQwIDQwczAwIDQwLTQwIDQweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMCAyODBjMCAwIDQwIDAgNDAgNDAgMCA0MCA0MCA0MCA0MCAwIDQwIDAgMCA0MCA0MCA0MHMtNDAgMC00MC00MC0wLTQwLTQwLTQwLTQwLTQwczAwLTQwIDQwIDB6Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.character-image[data-character="colleague-male"] {
-    background-color: #d4f1f9;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.character-image[data-character="colleague-female"] {
-    background-color: #e4c1f9;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.character-name {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.character-title {
-    font-size: 0.9rem;
-    color: #666;
-}
-
-/* 游戏界面 */
-.game-play {
-    width: 100%;
-    max-width: 800px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.character-info {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.character-info h2 {
-    font-size: 1.5rem;
-    margin-bottom: 5px;
-}
-
-.character-info p {
-    color: #666;
-}
-
-/* 对话框 */
-.dialog-box {
-    width: 100%;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
-}
-
-.pua-quote {
-    font-size: 1.1rem;
-    margin-bottom: 10px;
-    color: #ff6b6b;
-}
-
-.counter-quote {
-    font-size: 1.1rem;
-    color: #4ecdc4;
-    font-weight: bold;
-}
-
-/* 血条 */
-.health-bar {
-    width: 100%;
-    height: 30px;
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    overflow: hidden;
-    margin-bottom: 20px;
-    position: relative;
-}
-
-.health-bar-fill {
-    height: 100%;
-    background-color: #ff6b6b;
-    transition: width 0.5s ease;
-}
-
-.health-bar-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-weight: bold;
-    color: white;
-    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
-}
-
-/* 连击计数器 */
-.combo-counter {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #45b7d1;
-}
-
-/* 人物身体部位 */
-.character-body {
-    width: 300px;
-    height: 400px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-    margin-bottom: 20px;
-    overflow: hidden;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.character-body[data-character="boss-female"] {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-}
-
-.character-body[data-character="boss-male"] {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-}
-
-.character-body[data-character="colleague-male"] {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-}
-
-.character-body[data-character="colleague-female"] {
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
-}
-
-.body-part {
-    position: absolute;
-    background-color: rgba(255, 107, 107, 0.1);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border-radius: 5px;
-}
-
-.body-part:hover {
-    background-color: rgba(255, 107, 107, 0.3);
-}
-
-.body-part[data-part="head"] {
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 80px;
-}
-
-.body-part[data-part="chest"] {
-    top: 110px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 100px;
-}
-
-.body-part[data-part="left-arm"] {
-    top: 110px;
-    left: 60px;
-    width: 50px;
-    height: 100px;
-}
-
-.body-part[data-part="right-arm"] {
-    top: 110px;
-    right: 60px;
-    width: 50px;
-    height: 100px;
-}
-
-.body-part[data-part="stomach"] {
-    top: 220px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100px;
-    height: 80px;
-}
-
-.body-part[data-part="legs"] {
-    top: 310px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 120px;
-    height: 70px;
-}
-
-/* 伤害数字 */
-.damage-numbers {
-    position: absolute;
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-}
-
-.damage-number {
-    position: absolute;
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ff6b6b;
-    animation: damageFloat 1s ease-out forwards;
-}
-
-@keyframes damageFloat {
-    0% {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    100% {
-        opacity: 0;
-        transform: translateY(-50px) scale(1.5);
-    }
-}
-
-/* 游戏控制 */
-.game-controls {
-    margin-top: 20px;
-}
-
-.back-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-    background-color: #45b7d1;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.back-btn:hover {
-    background-color: #3a9ec1;
-    transform: translateY(-2px);
-}
-
-/* 胜利界面 */
-.victory-screen {
-    background-color: white;
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: victoryAnimation 0.5s ease-out;
-}
-
-.victory-screen h2 {
-    font-size: 2rem;
-    color: #4ecdc4;
-    margin-bottom: 10px;
-}
-
-.victory-screen p {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-}
-
-.restart-btn {
-    padding: 10px 20px;
-    font-size: 1.2rem;
-    background-color: #4ecdc4;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.restart-btn:hover {
-    background-color: #45b7a8;
-    transform: translateY(-2px);
-}
-
-@keyframes victoryAnimation {
-    0% {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .game-title {
-        font-size: 2.5rem;
-    }
-    
-    .game-subtitle {
-        font-size: 1.2rem;
-    }
-    
-    .character-card {
-        width: 150px;
-        height: 200px;
-    }
-    
-    .character-body {
-        width: 250px;
-        height: 350px;
-    }
-}
-
-/* 打击特效 */
-.hit-effect {
-    position: absolute;
-    width: 40px;
-    height: 40px;
-    background-color: rgba(255, 107, 107, 0.7);
-    border-radius: 50%;
-    animation: hitEffect 0.3s ease-out forwards;
-}
-
-@keyframes hitEffect {
-    0% {
-        transform: scale(0);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-}
-
-/* 人物受打击动画 */
-.character-body.hit {
-    animation: hitCharacter 0.3s ease-out forwards;
-}
-
-@keyframes hitCharacter {
-    0% {
-        transform: rotate(0deg) scale(1);
-    }
-    25% {
-        transform: rotate(-5deg) scale(0.95);
-    }
-    50% {
-        transform: rotate(5deg) scale(1.05);
-    }
-    75% {
-        transform: rotate(-3deg) scale(0.98);
-    }
-    100% {
-        transform: rotate(0deg) scale(1);
-    }
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+  .main { padding: 72px 16px 40px; }
+  .section-title { font-size: 22px; }
+  .upload-zone { padding: 36px 16px; }
+  .url-row { flex-direction: column; }
+  .progress-ring { width: 120px; height: 120px; }
+  .progress-pct { font-size: 22px; }
+  .process-steps { gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .stems-grid { gap: 10px; }
+  .stem-card { padding: 12px 14px; }
 }

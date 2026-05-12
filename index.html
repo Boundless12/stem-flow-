@@ -1,112 +1,126 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>职场暴击 - 反职场PUA游戏</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StemFlow - AI 音乐分轨工具</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- 游戏容器 -->
-    <div class="game-container">
-        <!-- 游戏标题 -->
-        <h1 class="game-title">职场暴击</h1>
-        <p class="game-subtitle">反职场PUA</p>
-        
-        <!-- 游戏说明 -->
-        <div class="game-info" id="gameInfo">
-            <h2>玩法说明</h2>
-            <p>1. 选择一个职场人物进入游戏</p>
-            <p>2. 点击人物不同部位进行打击</p>
-            <p>3. 每次打击会显示PUA语录和回怼金句</p>
-            <p>4. 连击越高，伤害越大</p>
-            <p>5. 把PUA能量打空即可获胜！</p>
-            <button class="start-btn" onclick="showCharacterSelect()">开始游戏</button>
-        </div>
-        
-        <!-- 人物选择界面 -->
-        <div class="character-select" id="characterSelect" style="display: none;">
-            <h2>选择目标</h2>
-            <div class="characters">
-                <div class="character-card" onclick="selectCharacter('boss-female')">
-                    <div class="character-image" data-character="boss-female">
-                        <div class="character-name">刻薄女老板</div>
-                        <div class="character-title">中年PUA大师</div>
-                    </div>
-                </div>
-                <div class="character-card" onclick="selectCharacter('boss-male')">
-                    <div class="character-image" data-character="boss-male">
-                        <div class="character-name">油腻男老板</div>
-                        <div class="character-title">画饼专家</div>
-                    </div>
-                </div>
-                <div class="character-card" onclick="selectCharacter('colleague-male')">
-                    <div class="character-image" data-character="colleague-male">
-                        <div class="character-name">猥琐男同事</div>
-                        <div class="character-title">告状专业户</div>
-                    </div>
-                </div>
-                <div class="character-card" onclick="selectCharacter('colleague-female')">
-                    <div class="character-image" data-character="colleague-female">
-                        <div class="character-name">阴阳女同事</div>
-                        <div class="character-title">冷嘲热讽王</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 游戏界面 -->
-        <div class="game-play" id="gamePlay" style="display: none;">
-            <!-- 人物信息 -->
-            <div class="character-info">
-                <h2 id="currentCharacterName">刻薄女老板</h2>
-                <p id="currentCharacterTitle">中年PUA大师</p>
-            </div>
-            
-            <!-- PUA语录和回怼金句 -->
-            <div class="dialog-box">
-                <div class="pua-quote" id="puaQuote">"你最近工作状态不好啊，是不是家里有什么事？"</div>
-                <div class="counter-quote" id="counterQuote">"我的工作状态很好，不需要你操心。"</div>
-            </div>
-            
-            <!-- 血条 -->
-            <div class="health-bar">
-                <div class="health-bar-fill" id="healthBarFill"></div>
-                <div class="health-bar-text" id="healthBarText">100%</div>
-            </div>
-            
-            <!-- 连击计数器 -->
-            <div class="combo-counter">
-                <span id="comboCount">0</span> 连击
-            </div>
-            
-            <!-- 人物身体部位 -->
-            <div class="character-body" id="characterBody">
-                <div class="body-part" data-part="head"></div>
-                <div class="body-part" data-part="chest"></div>
-                <div class="body-part" data-part="left-arm"></div>
-                <div class="body-part" data-part="right-arm"></div>
-                <div class="body-part" data-part="stomach"></div>
-                <div class="body-part" data-part="legs"></div>
-            </div>
-            
-            <!-- 伤害数字 -->
-            <div class="damage-numbers" id="damageNumbers"></div>
-            
-            <!-- 控制按钮 -->
-            <div class="game-controls">
-                <button class="back-btn" onclick="backToCharacterSelect()">更换目标</button>
-            </div>
-        </div>
-        
-        <!-- 胜利界面 -->
-        <div class="victory-screen" id="victoryScreen" style="display: none;">
-            <h2>胜利！</h2>
-            <p>你成功击败了PUA大师！</p>
-            <button class="restart-btn" onclick="restartGame()">再来一局</button>
-        </div>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-inner">
+      <div class="nav-brand">
+        <svg class="logo-icon" viewBox="0 0 32 32" width="28" height="28">
+          <circle cx="16" cy="16" r="14" fill="none" stroke="#4A90D9" stroke-width="2"/>
+          <path d="M10 22V12l8-2v10" fill="none" stroke="#FF6B35" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 20a2 2 0 100-4 2 2 0 000 4z" fill="#FF6B35"/>
+        </svg>
+        <span class="brand-text">StemFlow</span>
+      </div>
+      <div class="nav-links">
+        <a href="#features">功能介绍</a>
+        <a href="#howto">使用说明</a>
+      </div>
     </div>
-    
-    <script src="script.js"></script>
+  </nav>
+
+  <main class="main">
+    <!-- Upload Section -->
+    <section class="upload-section">
+      <h1 class="section-title">AI 智能分轨</h1>
+      <p class="section-desc">上传歌曲，自动分离为人声、鼓组、贝斯等独立音轨</p>
+
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">
+          <svg viewBox="0 0 48 48" width="48" height="48">
+            <path d="M24 6v24M16 18l8-8 8 8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M8 34v4a4 4 0 004 4h24a4 4 0 004-4v-4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="upload-text">拖拽音频文件到此处</p>
+        <p class="upload-sub">或点击选择文件 · 支持 MP3 / WAV / FLAC / M4A</p>
+        <button class="upload-btn" id="uploadBtn">选择音频文件</button>
+        <input type="file" id="fileInput" accept=".mp3,.wav,.flac,.m4a,.aac,.ogg" hidden>
+      </div>
+
+      <!-- URL input -->
+      <div class="url-input-group">
+        <div class="url-divider"><span>或</span></div>
+        <div class="url-row">
+          <input type="text" class="url-input" id="urlInput" placeholder="粘贴在线音频链接，抓取音乐并自动分轨...">
+          <button class="url-btn" id="urlBtn">抓取并分轨</button>
+        </div>
+      </div>
+
+      <!-- Format hint -->
+      <div class="format-hint">
+        <span>支持格式</span>
+        <span class="format-badge">MP3</span>
+        <span class="format-badge">WAV</span>
+        <span class="format-badge">FLAC</span>
+        <span class="format-badge">M4A</span>
+        <span class="format-badge">AAC</span>
+        <span class="format-badge">OGG</span>
+      </div>
+    </section>
+
+    <!-- Processing Section -->
+    <section class="processing-section" id="processingSection" style="display:none">
+      <div class="process-header">
+        <div class="file-info">
+          <svg viewBox="0 0 24 24" width="20" height="20" class="file-icon">
+            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" fill="none" stroke="currentColor" stroke-width="2"/>
+            <path d="M14 2v6h6" fill="none" stroke="currentColor" stroke-width="2"/>
+          </svg>
+          <span id="fileName">song.mp3</span>
+        </div>
+        <span class="process-status" id="processStatus">上传中...</span>
+      </div>
+
+      <div class="progress-ring-container">
+        <svg class="progress-ring" viewBox="0 0 120 120" width="160" height="160">
+          <circle class="progress-track" cx="60" cy="60" r="54" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="8"/>
+          <circle class="progress-fill" id="progressFill" cx="60" cy="60" r="54" fill="none" stroke="url(#progGrad)" stroke-width="8"
+            stroke-linecap="round" transform="rotate(-90 60 60)"
+            stroke-dasharray="339.292" stroke-dashoffset="339.292"/>
+          <defs>
+            <linearGradient id="progGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#4A90D9"/>
+              <stop offset="100%" stop-color="#FF6B35"/>
+            </linearGradient>
+          </defs>
+        </svg>
+        <div class="progress-text">
+          <span class="progress-pct" id="progressPct">0%</span>
+          <span class="progress-label">处理中</span>
+        </div>
+      </div>
+
+      <div class="process-steps">
+        <div class="step" id="stepUpload"><div class="step-dot"></div>文件上传</div>
+        <div class="step" id="stepAnalyze"><div class="step-dot"></div>音频分析</div>
+        <div class="step" id="stepSeparate"><div class="step-dot"></div>AI 分轨</div>
+        <div class="step" id="stepDone"><div class="step-dot"></div>完成</div>
+      </div>
+    </section>
+
+    <!-- Stems Panel -->
+    <section class="stems-section" id="stemsSection" style="display:none">
+      <div class="stems-header">
+        <h2>分离结果</h2>
+        <button class="new-btn" id="newTaskBtn">+ 新任务</button>
+      </div>
+      <div class="stems-grid" id="stemsGrid">
+        <!-- Rendered by JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>StemFlow · AI 音乐分轨工具</span>
+  </footer>
+
+  <script src="app.js"></script>
 </body>
 </html>
