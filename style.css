@@ -1,0 +1,509 @@
+/* 全局样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    overflow: hidden;
+}
+
+.game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 游戏标题 */
+.game-title {
+    font-size: 4rem;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 3s ease infinite;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.game-subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* 游戏说明 */
+.game-info {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.game-info h2 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.game-info p {
+    margin-bottom: 10px;
+    text-align: left;
+}
+
+.start-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.start-btn:hover {
+    background-color: #ee5a52;
+    transform: translateY(-2px);
+}
+
+/* 人物选择界面 */
+.character-select {
+    text-align: center;
+    width: 100%;
+}
+
+.character-select h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.characters {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.character-card {
+    width: 200px;
+    height: 250px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.character-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.character-image {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f8f9fa;
+    position: relative;
+}
+
+.character-image[data-character="boss-female"] {
+    background-color: #ffc1cc;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwYzAgMC0yMCAwLTIwLTIwczAgLTIwIDIwLTIwIDIwIDAgMjAgMjAgMjAgMjAgMjAgMjB6bTAtMTBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBjMCAwIDIwIDAgMjAtMjBzMC0yMC0yMC0yMC0yMCAwLTIwIDIwLTIwIDIwLTIwIDIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjYwYzAtNS01LTEwLTEwLTEwcy0xMCA1LTEwIDEwIDUgNSAxMCA1IDEwLTUgMTAtNXptLTYwIDBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMjgwYzAgMC00MCAwLTQwLTQwczAtNDAgNDAgMCA0MCA0MCAwIDQwIDQwIDQwczAwIDQwLTQwIDQweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMCAyODBjMCAwIDQwIDAgNDAgNDAgMCA0MCA0MCA0MCA0MCAwIDQwIDAgMCA0MCA0MCA0MHMtNDAgMC00MC00MC0wLTQwLTQwLTQwLTQwLTQwczAwLTQwIDQwIDB6Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.character-image[data-character="boss-male"] {
+    background-color: #c1d3fe;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwYzAgMC0yMCAwLTIwLTIwczAgLTIwIDIwLTIwIDIwIDAgMjAgMjAgMjAgMjAgMjAgMjB6bTAtMTBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBjMCAwIDIwIDAgMjAtMjBzMC0yMC0yMC0yMC0yMCAwLTIwIDIwLTIwIDIwLTIwIDIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjYwYzAtNS01LTEwLTEwLTEwcy0xMCA1LTEwIDEwIDUgNSAxMCA1IDEwLTUgMTAtNXptLTYwIDBjMC01LTUtMTAtMTAtMTBzLTEwIDUtMTAgMTAgNSA1IDEwIDUgMTAtNSAxMC01eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0xODAgMjgwYzAgMC00MCAwLTQwLTQwczAtNDAgNDAgMCA0MCA0MCAwIDQwIDQwIDQwczAwIDQwLTQwIDQweiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik0yMCAyODBjMCAwIDQwIDAgNDAgNDAgMCA0MCA0MCA0MCA0MCAwIDQwIDAgMCA0MCA0MCA0MHMtNDAgMC00MC00MC0wLTQwLTQwLTQwLTQwLTQwczAwLTQwIDQwIDB6Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.character-image[data-character="colleague-male"] {
+    background-color: #d4f1f9;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.character-image[data-character="colleague-female"] {
+    background-color: #e4c1f9;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.character-name {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.character-title {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 游戏界面 */
+.game-play {
+    width: 100%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.character-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.character-info h2 {
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.character-info p {
+    color: #666;
+}
+
+/* 对话框 */
+.dialog-box {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.pua-quote {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #ff6b6b;
+}
+
+.counter-quote {
+    font-size: 1.1rem;
+    color: #4ecdc4;
+    font-weight: bold;
+}
+
+/* 血条 */
+.health-bar {
+    width: 100%;
+    height: 30px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.health-bar-fill {
+    height: 100%;
+    background-color: #ff6b6b;
+    transition: width 0.5s ease;
+}
+
+.health-bar-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+    color: white;
+    text-shadow: 0 0 3px rgba(0, 0, 0, 0.5);
+}
+
+/* 连击计数器 */
+.combo-counter {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #45b7d1;
+}
+
+/* 人物身体部位 */
+.character-body {
+    width: 300px;
+    height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: relative;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.character-body[data-character="boss-female"] {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+}
+
+.character-body[data-character="boss-male"] {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+}
+
+.character-body[data-character="colleague-male"] {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+}
+
+.character-body[data-character="colleague-female"] {
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyMDAgMzAwIj48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTQ1IDc1YzAgMC0xMCAxMC0xNSAxNWMtNSA1LTEwIDAtMTUgMGMtNS01LTEwLTEwLTEwLTEwczUtNSAxMC0xMCAxNS0xNWM1LTUgMTAgMCAxNSAwczEwIDEwIDE1IDE1eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xNDUgODBoLTkwdjYwaDkwVjgwem0wIDQwaC05MHY2MGg5MFYxMjB6Ij48L3BhdGg+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMC0yMGMtMjAgMC0yMCAyMC0yMCAyMHYzNWMwIDEwIDEwIDIwIDIwIDIwczIwLTEwIDIwLTIwVjA4YzAtMjAtMjAtMjAtMjAtMjB6bTEwIDgwYzAgMC01LTUtMTAtNXMtMTAgNS0xMCAxMCA1IDUgMTAgNSAxMCA1czUtNSAxMC01eiI+PC9wYXRoPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xMDAgMTQwYTMwIDMwIDAgMCAxIDAgNjAgMzAgMzAgMCAwIDEgMC02MHoiPjwvcGF0aD48cGF0aCBmaWxsPSIjZmZmIiBkPSJNMTgwIDE4MGMwIDAgLTQwIDAtNTAgLTUwczMtMTAgMTAtMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAgMTAtMTAgMTAtMTAgMTAtMTB6bTAtMjBjMCAwLTIwIDAtMjAgMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAxODBjMCAwIDQwIDAgNTAtNTBzLTMtMTAtMTAtMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAtMTAgMTAgMTAgMTB6bTAgMjBjMCAwIDIwIDAgMjAtMjBzMCAyMCAyMCAyMCAyMCAwIDIwLTIwIDIwLTIweiIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0xODAgMjQwczAtMjAgMjAtMjAgMjAgMCAyMCAyMCAyMCAyMCAyMCAyMCIvPjxwYXRoIGZpbGw9IiM4ODgiIGQ9Ik0yMCAyNDBzMjAgMCAyMCAyMCAwIDIwLTIwIDIwLTIwIDAgLTIwLTIwIi8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTEwMCAzMHptMCAxMCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik04NSA0MCIvPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0xMTUgNDAiLz48cGF0aCBmaWxsPSIjMzMzIiBkPSJNMTMwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iIzMzMyIgZD0iTTcwIDYwIiBvcmllbnQ9ImF1dG8iIHN0cm9rZT0iIzMzMyIgc3Ryb2tlLXdpZHRoPSI4Ii8+PHBhdGggZmlsbD0iI2ZmZiIgZD0iTTEwMCA1MGMwLTMgMy01IDYtNXMzIDIgNiA1IDMtMyA2LTYtNi02eiI+PC9wYXRoPjwvc3ZnPg==');
+}
+
+.body-part {
+    position: absolute;
+    background-color: rgba(255, 107, 107, 0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-radius: 5px;
+}
+
+.body-part:hover {
+    background-color: rgba(255, 107, 107, 0.3);
+}
+
+.body-part[data-part="head"] {
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 80px;
+}
+
+.body-part[data-part="chest"] {
+    top: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 100px;
+}
+
+.body-part[data-part="left-arm"] {
+    top: 110px;
+    left: 60px;
+    width: 50px;
+    height: 100px;
+}
+
+.body-part[data-part="right-arm"] {
+    top: 110px;
+    right: 60px;
+    width: 50px;
+    height: 100px;
+}
+
+.body-part[data-part="stomach"] {
+    top: 220px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 80px;
+}
+
+.body-part[data-part="legs"] {
+    top: 310px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 70px;
+}
+
+/* 伤害数字 */
+.damage-numbers {
+    position: absolute;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+.damage-number {
+    position: absolute;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ff6b6b;
+    animation: damageFloat 1s ease-out forwards;
+}
+
+@keyframes damageFloat {
+    0% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-50px) scale(1.5);
+    }
+}
+
+/* 游戏控制 */
+.game-controls {
+    margin-top: 20px;
+}
+
+.back-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #45b7d1;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background-color: #3a9ec1;
+    transform: translateY(-2px);
+}
+
+/* 胜利界面 */
+.victory-screen {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: victoryAnimation 0.5s ease-out;
+}
+
+.victory-screen h2 {
+    font-size: 2rem;
+    color: #4ecdc4;
+    margin-bottom: 10px;
+}
+
+.victory-screen p {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.restart-btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #4ecdc4;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.restart-btn:hover {
+    background-color: #45b7a8;
+    transform: translateY(-2px);
+}
+
+@keyframes victoryAnimation {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .game-title {
+        font-size: 2.5rem;
+    }
+    
+    .game-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .character-card {
+        width: 150px;
+        height: 200px;
+    }
+    
+    .character-body {
+        width: 250px;
+        height: 350px;
+    }
+}
+
+/* 打击特效 */
+.hit-effect {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 107, 107, 0.7);
+    border-radius: 50%;
+    animation: hitEffect 0.3s ease-out forwards;
+}
+
+@keyframes hitEffect {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
+}
+
+/* 人物受打击动画 */
+.character-body.hit {
+    animation: hitCharacter 0.3s ease-out forwards;
+}
+
+@keyframes hitCharacter {
+    0% {
+        transform: rotate(0deg) scale(1);
+    }
+    25% {
+        transform: rotate(-5deg) scale(0.95);
+    }
+    50% {
+        transform: rotate(5deg) scale(1.05);
+    }
+    75% {
+        transform: rotate(-3deg) scale(0.98);
+    }
+    100% {
+        transform: rotate(0deg) scale(1);
+    }
+}

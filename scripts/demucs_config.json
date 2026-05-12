@@ -1,0 +1,22 @@
+{
+  "_comment": "StemFlow Demucs AI 分轨引擎配置",
+  "model": {
+    "name": "htdemucs",
+    "device": "cpu",
+    "shifts": 1,
+    "overlap": 0.25,
+    "split": true,
+    "segment": null,
+    "threads": 4
+  },
+  "mirror": {
+    "pip": "https://pypi.tuna.tsinghua.edu.cn/simple",
+    "pytorch": "https://mirrors.tuna.tsinghua.edu.cn/pytorch/whl/cpu",
+    "huggingface": "https://hf-mirror.com"
+  },
+  "paths": {
+    "torch_home": null,
+    "demucs_cache": null,
+    "ffmpeg": "ffmpeg"
+  }
+}

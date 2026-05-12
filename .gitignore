@@ -1,0 +1,16 @@
+node_modules/
+venv/
+.venv/
+__pycache__/
+*.pyc
+uploads/*
+stems/*
+!uploads/.gitkeep
+!stems/.gitkeep
+*.log
+.env
+.DS_Store
+Thumbs.db
+*.whl
+/dist/
+/build/

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/validate-write.js 2>&1 || true",
+            "timeout": 10,
+            "statusMessage": "Validating file integrity..."
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo '{\"systemMessage\": \"=== Music Stem Splitter Project ===\\nCurrent task: Building music stem splitter app\\nKey files: server.js, public/index.html, public/style.css, public/app.js, processor.py\\nDesign: Deep blue theme (#080E1A-#162240) with orange accent (#FF6B35)\"}'; true",
+            "timeout": 5,
+            "statusMessage": "Preserving project context..."
+          }
+        ]
+      }
+    ]
+  }
+}
