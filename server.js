@@ -36,7 +36,9 @@ try {
   } catch { /* noop */ }
 } catch { console.log('  Python 虚拟环境未就绪'); }
 
-app.use(cors());
+// CORS — 部署时设置 ALLOW_ORIGIN=https://你的域名.vercel.app
+const ALLOW_ORIGIN = process.env.ALLOW_ORIGIN || '*';
+app.use(cors({ origin: ALLOW_ORIGIN }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -373,6 +375,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   console.log(`🎵 Music Stem Splitter running at http://localhost:${PORT}`);
 });

@@ -1,3 +1,22 @@
+// ===== API Config —— 部署时修改此处指向你的后端服务器 =====
+const API_BASE = (() => {
+  // 检测是否在 Vercel 静态站点上运行
+  if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    // 部署到 Vercel 时，后端需单独运行，在此填入你的后端地址
+    return localStorage.getItem('api_server') || prompt('请输入后端服务器地址（如 http://123.456.789.0:3000）：') || '';
+  }
+  return ''; // 本地开发用相对路径
+})();
+
+function api(path, opts = {}) {
+  return fetch(API_BASE + path, opts);
+}
+
+// 持久化 API 地址
+if (API_BASE && !localStorage.getItem('api_server')) {
+  localStorage.setItem('api_server', API_BASE);
+}
+
 // ===== State =====
 const state = {
   jobId: null,
@@ -69,7 +88,7 @@ async function uploadFile(file) {
   updateProgress(15);
 
   try {
-    const res = await fetch('/api/upload', { method: 'POST', body: form });
+    const res = await api('/api/upload', { method: 'POST', body: form });
     const json = await res.json();
     if (!json.success) throw new Error(json.message);
     state.jobId = json.data.id;
@@ -91,7 +110,7 @@ urlBtn.addEventListener('click', async () => {
   updateProgress(10);
 
   try {
-    const res = await fetch('/api/capture', {
+    const res = await api('/api/capture', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ url })
@@ -114,7 +133,7 @@ async function startProcessing() {
   setStepActive('stepAnalyze');
 
   try {
-    const res = await fetch(`/api/process/${state.jobId}`, { method: 'POST' });
+    const res = await api(`/api/process/${state.jobId}`, { method: 'POST' });
     // Start polling
     state.polling = setInterval(pollStatus, 400);
   } catch (e) {
@@ -127,7 +146,7 @@ async function pollStatus() {
   if (!state.jobId) return;
 
   try {
-    const res = await fetch(`/api/status/${state.jobId}`);
+    const res = await api(`/api/status/${state.jobId}`);
     const json = await res.json();
     if (!json.success) { clearInterval(state.polling); return; }
 
@@ -158,7 +177,7 @@ async function pollStatus() {
 // ===== Load Stems =====
 async function loadStems() {
   try {
-    const res = await fetch(`/api/stems/${state.jobId}`);
+    const res = await api(`/api/stems/${state.jobId}`);
     const json = await res.json();
     if (!json.success) return;
 
@@ -197,7 +216,7 @@ function renderStems() {
           <button class="control-btn solo-btn" data-stem="${stem.name}" title="独奏">
             S
           </button>
-          <a class="download-btn" href="/api/download/${state.jobId}/${stem.name}" download title="下载">
+          <a class="download-btn" href="${API_BASE}/api/download/${state.jobId}/${stem.name}" download title="下载">
             <svg viewBox="0 0 24 24" width="14" height="14"><path d="M12 3v12m-5-5l5 5 5-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
             下载
           </a>
@@ -242,7 +261,7 @@ async function togglePlay(stemName) {
   state.currentPlaying = stemName;
 
   // Check if we have a real stem URL
-  const previewUrl = `/api/preview/${state.jobId}/${stemName}`;
+  const previewUrl = `${API_BASE}/api/preview/${state.jobId}/${stemName}`;
   try {
     const audio = new Audio(previewUrl);
     audio.addEventListener('ended', stopPlayback);
