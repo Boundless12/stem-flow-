@@ -70,7 +70,8 @@
       "Bash(vercel --version)",
       "Bash(npx vercel *)",
       "Bash(vercel whoami *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(vercel list *)"
     ]
   }
 }
