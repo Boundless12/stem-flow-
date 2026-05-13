@@ -4,7 +4,8 @@
   "description": "AI音乐分轨抓取工具 - 将歌曲分离为人声、鼓组、贝斯等独立音轨",
   "main": "server.js",
   "scripts": {
-    "dev": "node --watch server.js"
+    "dev": "node --watch server.js",
+    "vercel-build": "mkdir -p dist && cp index.html style.css app.js dist/"
   },
   "dependencies": {
     "express": "^4.21.0",
