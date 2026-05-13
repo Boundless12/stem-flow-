@@ -78,6 +78,37 @@ body {
 
 /* ===== Upload Section ===== */
 .upload-section { text-align: center; padding-top: 24px; }
+
+/* Backend banner */
+.backend-banner {
+  max-width: 640px;
+  margin: 0 auto 20px;
+  padding: 12px 18px;
+  background: rgba(255, 107, 53, 0.1);
+  border: 1px solid rgba(255, 107, 53, 0.25);
+  border-radius: 10px;
+}
+.backend-banner-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-secondary);
+  font-size: 14px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.backend-banner-inner svg { color: var(--accent); flex-shrink: 0; }
+.backend-config-btn {
+  padding: 6px 14px;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.backend-config-btn:hover { background: var(--accent-hover); }
 .section-title {
   font-size: 28px; font-weight: 700; letter-spacing: -0.3px;
   background: linear-gradient(135deg, #E8EDF5, #4A90D9);

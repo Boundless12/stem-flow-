@@ -1,9 +1,7 @@
 // ===== API Config —— 部署时修改此处指向你的后端服务器 =====
 const API_BASE = (() => {
-  // 检测是否在 Vercel 静态站点上运行
   if (window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
-    // 部署到 Vercel 时，后端需单独运行，在此填入你的后端地址
-    return localStorage.getItem('api_server') || prompt('请输入后端服务器地址（如 http://123.456.789.0:3000）：') || '';
+    return localStorage.getItem('api_server') || '';
   }
   return ''; // 本地开发用相对路径
 })();
@@ -74,6 +72,8 @@ fileInput.addEventListener('change', () => {
 
 // ===== Upload =====
 async function uploadFile(file) {
+  if (!ensureBackend()) return;
+
   const validTypes = ['.mp3','.wav','.flac','.m4a','.aac','.ogg'];
   const ext = '.' + file.name.split('.').pop().toLowerCase();
   if (!validTypes.includes(ext)) {
@@ -100,6 +100,7 @@ async function uploadFile(file) {
 
 // ===== URL Capture =====
 urlBtn.addEventListener('click', async () => {
+  if (!ensureBackend()) return;
   const url = urlInput.value.trim();
   if (!url) { showToast('请输入音频链接'); return; }
 
@@ -464,6 +465,43 @@ newTaskBtn.addEventListener('click', () => {
     document.getElementById(id)?.classList.remove('active', 'done');
   });
 });
+
+// ===== Backend Config =====
+if (!API_BASE && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+  showBackendPrompt();
+}
+
+function showBackendPrompt() {
+  const section = document.querySelector('.upload-section');
+  const banner = document.createElement('div');
+  banner.className = 'backend-banner';
+  banner.innerHTML = `
+    <div class="backend-banner-inner">
+      <svg viewBox="0 0 24 24" width="18" height="18"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 8v4M12 16h0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <span>未配置后端服务器，上传和处理功能暂不可用</span>
+      <button class="backend-config-btn" id="backendConfigBtn">配置后端地址</button>
+    </div>
+  `;
+  section.insertBefore(banner, section.firstChild);
+  $('backendConfigBtn').addEventListener('click', configureBackend);
+}
+
+function configureBackend() {
+  const current = localStorage.getItem('api_server') || '';
+  const url = prompt('请输入后端服务器地址：', current);
+  if (url) {
+    localStorage.setItem('api_server', url);
+    location.reload();
+  }
+}
+
+function ensureBackend() {
+  if (!localStorage.getItem('api_server') && window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1') {
+    showToast('请先点击"配置后端地址"设置服务器');
+    return false;
+  }
+  return true;
+}
 
 // ===== Keyboard shortcuts =====
 document.addEventListener('keydown', e => {
