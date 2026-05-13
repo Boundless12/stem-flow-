@@ -1,5 +1,6 @@
 server.js
 processor.py
+node_modules/
 uploads/
 stems/
 scripts/
